@@ -1,0 +1,151 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Changed to align to the top */
+    height: 100vh;
+    padding-top: 2rem; /* Added padding at the top */
+    /*background-image: url('/static/hq720.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;*/
+}
+
+.container {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 800px; /* Wider container */
+    width: 100%;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.tax-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+input {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.calculate-button {
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%; /* Same width as the Show Details button */
+}
+
+.calculate-button:hover {
+    background-color: #0056b3;
+}
+
+.results {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.tax-regime {
+    padding: 1rem;
+    border-radius: 4px;
+    width: 32%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.old-regime {
+    background-color: #ffe6f9; /* Very pale blue */
+}
+
+.old-regime .tax-amount {
+    color: #cc00cc; /* Dark blue */
+}
+
+.new-regime {
+    background-color: #e6f0ff; /* Very pale magenta */
+}
+
+.new-regime .tax-amount {
+    color: #0044cc; /* Magenta */
+}
+
+.proposed-regime {
+    background-color: #e6ffe6; /* Very pale green */
+}
+
+.proposed-regime .tax-amount {
+    color: #009900; /* Green */
+}
+
+.tax-regime h2 {
+    color: #555;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.tax-amount {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.effective-rate {
+    color: #666;
+    margin: 0.5rem 0;
+}
+.headings {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.grid-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.section-heading {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #eee;
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Tax Calculator Comparison as per Budget 2025</h1>
+        <form method="POST" class="tax-form">
+            <div class="input-grid">
+                <!-- Left Column -->
+                <div class="grid-column">
+                    <h2 class="section-heading">Income Details</h2>
+                    <div class="input-group">
+                        <label for="gross_salary">Gross Salary (₹)</label>
+                        <input type="text" id="gross_salary" name="gross_salary" placeholder="Enter amount" required oninput="formatNumber(this)" value="{{ gross_salary if gross_salary else '' }}">
+                    </div>
+                    <div class="input-group">
+                        <label for="pension">Pension, if any</label>
+                        <input type="text" id="pension" name="pension" placeholder="Enter amount, if any" oninput="formatNumber(this)" value="{{ pension if pension else '' }}">
+                    </div>
+                </div>
+                
+                <!-- Right Column -->
+                <div class="grid-column">
+                    <h2 class="section-heading">Deductions</h2>
+                    <div class="input-group">
+                        <label for="homeloan_int">Homeloan interest</label>
+                        <input type="text" id="homeloan_int" name="homeloan_int" placeholder="Enter amount, if any" oninput="formatNumber(this)" value="{{ homeloan_int if homeloan_int else '' }}">
+                    </div>
+                    <div class="input-group">
+                        <label for="sec_80c">Sec 80C PF, LIC, etc</label>
+                        <input type="text" id="sec_80c" name="sec_80c" placeholder="Enter amount, if any" oninput="formatNumber(this)" value="{{ sec_80c if sec_80c else '' }}">
+                    </div>
+                    <div class="input-group">
+                        <label for="nps">NPS Self Contribution</label>
+                        <input type="text" id="nps" name="nps" placeholder="Enter amount, if any" oninput="formatNumber(this)" value="{{ nps if nps else '' }}">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="calculate-button">Calculate</button>
+        </form>
+    
+        
+    {% if old_tax is not none and new_tax is not none and proposed_tax is not none %}
+    <p>You need to pay this amount as income tax under different tax regimes -</p>
+    <div class="results">
+        <div class="tax-regime old-regime">
+            <h2>Old Regime</h2>
+            <p class="tax-amount">₹{{ old_tax | format_indian_number }}</p>
+        </div>
+        <div class="tax-regime new-regime">
+            <h2>Present New Regime</h2>
+            <p class="tax-amount">₹{{ new_tax | format_indian_number }}</p>
+        </div>
+        <div class="tax-regime proposed-regime">
+            <h2>Proposed New Regime</h2>
+            <p class="tax-amount">₹{{ proposed_tax | format_indian_number }}</p>
+        </div>
+    </div>
+    {% endif %}
+
+    <script>
+        function formatNumber(input) {
+            let value = input.value.replace(/,/g, '');
+            value = value.replace(/[^0-9]/g, '');
+            
+            if (value.length > 3) {
+                let lastThree = value.slice(-3);
+                let otherNumbers = value.slice(0, -3);
+                
+                if (otherNumbers) {
+                    otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",");
+                }
+                
+                value = otherNumbers + "," + lastThree;
+            }
+            
+            input.value = value;
+            input.setAttribute('data-value', value.replace(/,/g, ''));
+        }
+    </script>
+</body>
+</html>
