@@ -43,7 +43,7 @@ function computeTax(taxableIncome, threshold, slabs) {
         }
     }
     
-    return tax * 1.04; // Add 4% cess
+    return tax;
 }
 
 function calculateTax(grossSalaryCalc, pensionCalc, homeloanIntCalc, sec80cCalc, npsCalc) {
@@ -58,23 +58,19 @@ function calculateTax(grossSalaryCalc, pensionCalc, homeloanIntCalc, sec80cCalc,
 
     // New Regime
     let taxableIncomeNew = Math.max(salary - 75000, 0);
-    let newTax = computeTax(taxableIncomeNew, 700001, [
-        [300000, 0.00], [400000, 0.05], [300000, 0.10], 
-        [200000, 0.15], [300000, 0.20], [null, 0.30]
-    ]);
-
-    // Proposed Regime
-    let taxableIncomeProposed = Math.max(salary - 75000, 0);
-    let proposedTaxNormal = computeTax(taxableIncomeProposed, 1200001, [
+    let newTaxNormal = computeTax(taxableIncomeNew, 1200001, [
         [400000, 0.00], [400000, 0.05], [400000, 0.10],
         [400000, 0.15], [400000, 0.20], [400000, 0.25], [null, 0.30]
     ]);
     
-    let proposedTax = (salary > 1275000) 
-        ? Math.min(salary - 1275000, proposedTaxNormal) 
-        : proposedTaxNormal;
+    let newTax = (salary > 1275000) 
+        ? Math.min(salary - 1275000, newTaxNormal) 
+        : newTaxNormal;
 
-    return { oldTax, newTax, proposedTax };
+	oldTax = oldTax * 1.04;
+	newTax = newTax * 1.04;
+
+    return { oldTax, newTax, };
 }
 
 // Handle form submission
@@ -115,6 +111,5 @@ document.getElementById('taxForm').addEventListener('submit', function(e) {
     // Display results
     document.getElementById('old_tax_result').textContent = '₹' + formatIndian(results.oldTax);
     document.getElementById('new_tax_result').textContent = '₹' + formatIndian(results.newTax);
-    document.getElementById('proposed_tax_result').textContent = '₹' + formatIndian(results.proposedTax);
     document.getElementById('results').style.display = 'block';
 });
