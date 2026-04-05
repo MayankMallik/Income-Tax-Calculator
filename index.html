@@ -12,7 +12,7 @@
   </head>
   <body>
     <div class="container">
-      <h1>Tax Calculator Comparison as per Budget 2025</h1>
+      <h1>Income Tax Calculator</h1>
       <form id="taxForm" class="tax-form">
         <div class="input-grid">
           <!-- Left Column -->
@@ -43,7 +43,7 @@
 
           <!-- Right Column -->
           <div class="grid-column">
-            <h2 class="section-heading">Deductions</h2>
+            <h2 class="section-heading">Deductions (Old Regime)</h2>
             <div class="input-group">
               <label for="homeloan_int">Homeloan interest</label>
               <input
@@ -55,7 +55,7 @@
               />
             </div>
             <div class="input-group">
-              <label for="sec_80c">Sec 80C PF, LIC, etc</label>
+              <label for="sec_80c">Sec 80C (PF, LIC, etc.)</label>
               <input
                 type="text"
                 id="sec_80c"
@@ -91,15 +91,8 @@
             <p class="tax-amount" id="old_tax_result">₹0</p>
           </div>
           <div class="tax-regime new-regime">
-            <h2>
-              New Regime <br />
-              (FY 2024-25)
-            </h2>
+            <h2>New Regime</h2>
             <p class="tax-amount" id="new_tax_result">₹0</p>
-          </div>
-          <div class="tax-regime proposed-regime">
-            <h2>Present New Regime <br /> (FY 2025-26)</h2>
-            <p class="tax-amount" id="proposed_tax_result">₹0</p>
           </div>
         </div>
         <p style="font-size: 11px">
@@ -112,6 +105,5 @@
     <script src="tax-calculator.js"></script>
   </body>
 </html>
-
 
 
