@@ -1,4 +1,4 @@
-// Format numbers with Indian commas (from your original HTML)
+// Format numbers with Indian commas
 function formatNumber(input) {
     let value = input.value.replace(/,/g, '');
     value = value.replace(/[^0-9]/g, '');
@@ -24,7 +24,7 @@ document.querySelectorAll('input[type="text"]').forEach(input => {
     });
 });
 
-// Tax calculation functions (converted from your Python)
+// Tax calculation functions
 function computeTax(taxableIncome, threshold, slabs) {
     if (taxableIncome < threshold) return 0;
     
@@ -43,20 +43,20 @@ function computeTax(taxableIncome, threshold, slabs) {
         }
     }
     
-    return tax;
+    return tax * 1.04; // Add 4% cess
 }
 
 function calculateTax(grossSalaryCalc, pensionCalc, homeloanIntCalc, sec80cCalc, npsCalc) {
     let salary = grossSalaryCalc + pensionCalc;
     let deductions = homeloanIntCalc + sec80cCalc + npsCalc;
 
-    // Old Regime
+    // --- OLD REGIME ---
     let taxableIncomeOld = Math.max(salary - deductions - 50000, 0);
     let oldTax = computeTax(taxableIncomeOld, 500001, [
         [250000, 0.00], [250000, 0.05], [500000, 0.20], [null, 0.30]
     ]);
 
-    // New Regime
+    // --- NEW REGIME ---
     let taxableIncomeNew = Math.max(salary - 75000, 0);
     let newTaxNormal = computeTax(taxableIncomeNew, 1200001, [
         [400000, 0.00], [400000, 0.05], [400000, 0.10],
@@ -67,17 +67,17 @@ function calculateTax(grossSalaryCalc, pensionCalc, homeloanIntCalc, sec80cCalc,
         ? Math.min(salary - 1275000, newTaxNormal) 
         : newTaxNormal;
 
-	oldTax = oldTax * 1.04;
-	newTax = newTax * 1.04;
-
-    return { oldTax, newTax, };
+    // Round up both results to the nearest whole number
+    return { 
+        oldTax: Math.ceil(oldTax), 
+        newTax: Math.ceil(newTax) 
+    };
 }
 
 // Handle form submission
 document.getElementById('taxForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Get values and convert to numbers
     const getNumber = id => {
         const value = document.getElementById(id).value.replace(/,/g, '');
         return value ? parseFloat(value) : 0;
@@ -91,10 +91,8 @@ document.getElementById('taxForm').addEventListener('submit', function(e) {
         getNumber('nps')
     );
 
-    // Format results with Indian number format
     const formatIndian = num => {
-        num = num.toFixed(2); // Keep 2 decimal places
-        let [integer, decimal] = num.split('.');
+        let integer = num.toString();
         
         if (integer.length > 3) {
             let lastThree = integer.slice(-3);
@@ -105,10 +103,9 @@ document.getElementById('taxForm').addEventListener('submit', function(e) {
             integer = otherNumbers ? otherNumbers + "," + lastThree : lastThree;
         }
         
-        return integer + (decimal ? `.${decimal}` : '');
+        return integer;
     };
 
-    // Display results
     document.getElementById('old_tax_result').textContent = '₹' + formatIndian(results.oldTax);
     document.getElementById('new_tax_result').textContent = '₹' + formatIndian(results.newTax);
     document.getElementById('results').style.display = 'block';
