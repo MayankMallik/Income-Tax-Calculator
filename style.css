@@ -93,16 +93,19 @@ input {
 .results {
     margin-top: 2rem;
     display: flex;
-    justify-content: space-between;
-    gap: 1rem;
+    flex-wrap: wrap; /* Allows boxes to drop to the next line */
+    justify-content: center;
+    gap: 1.5rem;
 }
 
 .tax-regime {
-    padding: 1rem;
-    border-radius: 4px;
-    width: 32%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    border-radius: 8px;
+    width: 45%; /* Side-by-side on desktop */
+    min-width: 280px; /* Prevents them from getting too squished */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     text-align: center;
+    box-sizing: border-box;
 }
 
 .old-regime {
@@ -114,19 +117,19 @@ input {
 }
 
 .new-regime {
-    background-color: #e6f0ff;
-}
-
-.new-regime .tax-amount {
-    color: #0044cc;
-}
-
-.proposed-regime {
     background-color: #e6ffe6;
 }
 
-.proposed-regime .tax-amount {
+.new-regime .tax-amount {
     color: #009900;
+}
+
+.disclaimer {
+    font-size: 11px;
+    color: #666;
+    margin-top: 2rem;
+    text-align: center;
+    line-height: 1.4;
 }
 
 .tax-regime h2 {
