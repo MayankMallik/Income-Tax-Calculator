@@ -1,61 +1,59 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tax Calculator</title>
+    <title>Income Tax Calculator</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="page">
-    <div class="container">
-        <h1>Income Tax Calculator</h1>
-        <form id="taxForm" class="tax-form">
-            <div class="input-grid">
-                <!-- Left Column -->
-                <div class="grid-column">
-                    <h2 class="section-heading">Income Details</h2>
-                    <div class="input-group">
-                        <label for="gross_salary">Gross Salary (₹)</label>
-                        <input type="text" id="gross_salary" name="gross_salary" placeholder="Enter amount" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="pension">Other Income (Pension, Interest, etc.)</label>
-                        <input type="text" id="pension" name="pension" placeholder="Enter amount, if any">
-                    </div>
+    <div class="calculator-card">
+        <h2>Income Tax Calculator</h2>
+        
+        <div class="inputs-grid">
+            <!-- Left Column: Income Details -->
+            <div class="grid-column">
+                <h3 class="section-heading">Income Details</h3>
+                <div class="input-group">
+                    <label for="gross_salary">Gross Salary (₹) <span class="asterisk">*</span></label>
+                    <input type="text" id="gross_salary" inputmode="numeric" placeholder="Enter amount">
                 </div>
-                
-                <!-- Right Column -->
-                <div class="grid-column">
-                    <h2 class="section-heading">Deductions (Old Regime)</h2>
-                    <div class="input-group">
-                        <label for="homeloan_int">Homeloan interest</label>
-                        <input type="text" id="homeloan_int" name="homeloan_int" placeholder="Enter amount, if any">
-                    </div>
-                    <div class="input-group">
-                        <label for="sec_80c">Sec 80C (PF, LIC, etc.)</label>
-                        <input type="text" id="sec_80c" name="sec_80c" placeholder="Enter amount, if any">
-                    </div>
-                    <div class="input-group">
-                        <label for="nps">Other deductions (80D, 80G, NPS, etc.)</label>
-                        <input type="text" id="nps" name="nps" placeholder="Enter amount, if any">
-                    </div>
+                <div class="input-group">
+                    <label for="pension">Other Income (Pension, Interest, etc.)</label>
+                    <input type="text" id="pension" inputmode="numeric" placeholder="Enter amount, if any">
                 </div>
             </div>
-            <button type="submit" class="calculate-button">Calculate</button>
-        </form>
-    
-        <!-- Results Section (initially hidden) -->
-        <div id="results" style="display: none;">
-            <p>You need to pay this amount as income tax under different tax regimes -</p>
-            <div class="results">
+            
+            <!-- Right Column: Deductions -->
+            <div class="grid-column">
+                <h3 class="section-heading">Deductions (Old Regime)</h3>
+                <div class="input-group">
+                    <label for="homeloan_int">Homeloan interest</label>
+                    <input type="text" id="homeloan_int" inputmode="numeric" placeholder="Enter amount, if any">
+                </div>
+                <div class="input-group">
+                    <label for="sec_80c">Sec 80C (PF, LIC, etc.)</label>
+                    <input type="text" id="sec_80c" inputmode="numeric" placeholder="Enter amount, if any">
+                </div>
+                <div class="input-group">
+                    <label for="nps">Other deductions (80D, 80G, NPS, etc.)</label>
+                    <input type="text" id="nps" inputmode="numeric" placeholder="Enter amount, if any">
+                </div>
+            </div>
+        </div>
+
+        <button onclick="handleCalculate()" style="background-color: #007bff; margin-top: 20px;"><b>Calculate</b></button>
+
+        <div id="results" style="display: none; margin-top: 25px;">
+            <p style="text-align: center; margin-bottom: 20px;">You need to pay this amount as income tax under different tax regimes -</p>
+            <div class="tax-results-container">
                 <div class="tax-regime old-regime">
-                    <h2>Old Regime</h2>
+                    <h3>Old Regime</h3>
                     <p class="tax-amount" id="old_tax_result">₹0</p>
                 </div>
                 <div class="tax-regime new-regime">
-                    <h2>New Regime</h2> <p class="tax-amount" id="new_tax_result">₹0</p>
+                    <h3>New Regime</h3>
+                    <p class="tax-amount" id="new_tax_result">₹0</p>
                 </div>
             </div>
             <div class="disclaimer">
@@ -63,8 +61,6 @@
             </div>
         </div>
     </div>
-    </div>
-
-    <script src="tax-calculator.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
